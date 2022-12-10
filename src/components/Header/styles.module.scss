@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 5rem;
+  padding: 0 5rem;
+  gap: 1rem;
+  background: var(--white);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.notificationButton {
+  display: flex;
+  position: relative;
+  color: var(--gray-500);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -1px;
+    width: 10px;
+    height: 10px;
+    background: var(--pink-500);
+    border: 2px solid var(--white);
+    border-radius: 100%;
+  }
+}
+
+.profileInformation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: default;
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+
+    .name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      line-height: 120%;
+    }
+
+    .email {
+      font-size: 0.75rem;
+    }
+  }
+}
