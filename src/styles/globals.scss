@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --white: #FFF;
+
+  --purple-500: #6A4BFF;
+  --pink-500: #E55175;
+
+  --gray-100: #F3F4F6;
+  --gray-500: #4B5563;
+  --gray-900: #1F2937;
+
+  //info
+  --blue-500: #1D4ED8;
+  --blue-100: #EFF6FF;
+
+  //success
+  --green-500: #059669;
+  --green-100: #ECFDF5;
+
+  //warning
+  --orange-500: #D97706;
+  --orange-100: #FFFBEB;
+
+  //error
+  --red-500: #DC2626;
+  --red-100: #FEF2F2;
+}
+
+body {
+  background: var(--white);
+  color: var(--gray-500);
+}
+
+body, input, button, textarea, select {
+  font: 400 1rem "Inter", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
