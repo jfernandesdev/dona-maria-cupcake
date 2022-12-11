@@ -7,6 +7,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { processStepsOptions } from '../../utils/processStepsOptions'
+import { experienceRequiredOptions } from '../../utils/experienceRequiredOptions'
 
 import styles from './styles.module.scss'
 
@@ -37,7 +38,7 @@ export function NewVacancy () {
       benefits: 'Benefício 1; Benefício 2',
       processSteps: ["Inscrição", "Resultado Final"],
       skills: 'Skill 1, Skill 2',
-      experienceRequired: 'Experience 1, Experience 2'
+      experienceRequired: 'Sem necessidade'
     }
   })
 
@@ -122,15 +123,15 @@ export function NewVacancy () {
           <span>Selecione as etapas do processo</span>  
           <div className={styles.processStepsContainer}>
             {processStepsOptions.map((option) => (
-              <div key={option.id} className={styles.inputCheckbox}>
+              <div key={option.key} className={styles.inputCheckbox}>
                 <input
                   type="checkbox"
-                  id={option.id}
-                  value={option.stepName}
+                  id={option.key}
+                  value={option.value}
                   {...register('processSteps')}
                 />
-                <label htmlFor={option.id}>
-                  {option.stepName}
+                <label htmlFor={option.key}>
+                  {option.value}
                 </label>
               </div>
             ))}
@@ -148,11 +149,22 @@ export function NewVacancy () {
 
         <label htmlFor="experienceRequired">
           <span>Experiência necessária</span>
-          <textarea 
-            id="experienceRequired"
-            {...register('experienceRequired')} 
-            className={errors.experienceRequired ? styles.inputErrorAlert : ''}
-          />
+
+          <div className={styles.customCheckbox}>
+            {experienceRequiredOptions.map((option) => (
+              <div key={option.key}>
+                <input
+                  type="radio"
+                  id={option.key}
+                  value={option.value}
+                  {...register('experienceRequired')}
+                />
+                <label htmlFor={option.key}>
+                  {option.value}
+                </label>
+              </div>
+            ))}
+          </div>
         </label>
 
         <footer>

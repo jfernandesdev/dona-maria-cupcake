@@ -1,7 +1,7 @@
 export const processStepsOptions = [
-  { id: 'inscricao', stepName: 'Inscrição' },
-  { id: 'dinamica', stepName: 'Dinâmica' },
-  { id: 'prova-tecnica', stepName: 'Prova Técnica' },
-  { id: 'entrevista', stepName: 'Entrevista' },
-  { id: 'resultado-final', stepName: 'Resultado Final' },
+  { key: 'inscricao', value: 'Inscrição' },
+  { key: 'dinamica', value: 'Dinâmica' },
+  { key: 'prova-tecnica', value: 'Prova Técnica' },
+  { key: 'entrevista', value: 'Entrevista' },
+  { key: 'resultado-final', value: 'Resultado Final' },
 ]
