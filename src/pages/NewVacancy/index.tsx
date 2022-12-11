@@ -1,9 +1,12 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import uuid from 'react-uuid'
+
+import { useVacancy } from '../../hooks/useVacancy'
+
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 import Swal from 'sweetalert2'
@@ -18,8 +21,8 @@ const newVacancyFormSchema = yup.object({
   jobTitle: yup.string().required(),
   wage: yup.number().required(),
   jobActivity: yup.string().required(),
-  benefits: yup.array().of(yup.string()).required(),
-  processSteps: yup.array().of(yup.string()),
+  benefits: yup.array().of(yup.string().required()).required(),
+  processSteps: yup.array().of(yup.string().required()).required(),
   skills: yup.string().required(),
   experienceRequired: yup.string().required(),
 })
@@ -27,6 +30,7 @@ const newVacancyFormSchema = yup.object({
 type NewVacancyFormInputs = yup.InferType<typeof newVacancyFormSchema>
 
 export function NewVacancy () {
+  const { addVacancy } = useVacancy()
   const methods = useForm<NewVacancyFormInputs>({
     resolver: yupResolver(newVacancyFormSchema),
     defaultValues: {
@@ -34,7 +38,7 @@ export function NewVacancy () {
       wage: 2000,
       jobActivity: 'Atividade 1; Atividade 2',
       processSteps: ["Inscrição", "Resultado Final"],
-      benefits: [''],
+      benefits: ['Vale-alimentação'],
       skills: 'Skill 1, Skill 2',
       experienceRequired: 'Sem necessidade'
     }
@@ -49,23 +53,15 @@ export function NewVacancy () {
   } = methods;
 
   const animatedComponents = makeAnimated();
+  const navigate = useNavigate();
   
   async function handleNewVacancy(data: NewVacancyFormInputs) {
-    const { jobTitle, wage, jobActivity, benefits, processSteps, skills, experienceRequired } = data
 
     const newVacancy = {
-      id: uuid(),
-      jobTitle,
-      wage,
-      jobActivity,
-      benefits,
-      processSteps,
-      skills,
-      experienceRequired,
-      creationDate: new Date(), 
+      ...data,
+      id: uuid()
     }
-
-    console.log(newVacancy)
+    addVacancy(newVacancy)
 
     reset()
 
@@ -76,13 +72,15 @@ export function NewVacancy () {
       showConfirmButton: false,
       timer: 2500,
       timerProgressBar: true,
+    }).then(() => {
+      navigate('/')
     })
   }
 
   return (
     <div>
       <h1>Cadastro de nova vaga</h1>
-
+      
       <form onSubmit={handleSubmit(handleNewVacancy)} className={styles.form}>
         <label htmlFor="processSteps">
           <span>Selecione as etapas do processo</span>
