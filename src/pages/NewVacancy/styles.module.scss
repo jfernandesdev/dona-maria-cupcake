@@ -17,20 +17,13 @@
 
   input, textarea {
     height: 48px;
-    border: 1px solid var(--gray-300);
-    border-radius: 0.5rem;
     padding: 1rem;
-
-    &:focus {
-      outline: 0;
-      box-shadow: 0 0 0 2px var(--purple-500);
-      background: transparent;
-      border: 0;
-    }
+    border: 1px solid var(--gray-300);
+    border-radius: 0.5rem;  
   }
 
   textarea {
-    height: 75px;
+    height: 100px;
     resize: none;
   }
 
@@ -246,7 +239,6 @@
     transition: background 0.2s color 0.2s;
     cursor: pointer;
 
-
     &:hover {
       border: 1px solid var(--purple-500);
       color: var(--purple-500);
@@ -263,4 +255,10 @@
     background: var(--purple-100);
     border: 1px solid var(--purple-500);
   }
+}
+
+.flex {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
