@@ -1,8 +1,15 @@
+import { pdf } from '@react-pdf/renderer'
+import { saveAs } from 'file-saver'
+
 import { FilePdf } from 'phosphor-react'
 
-import styles from './styles.module.scss'
+import { PdfExportLayout } from '../../layouts/PdfExportLayout'
 
+import { useVacancy } from '../../hooks/useVacancy'
 import { formatPrice } from '../../utils/formatPrice'
+import { stringToSlug } from '../../utils/stringToSlug'
+
+import styles from './styles.module.scss'
 
 interface JobCardProps {
   vacancy: {
@@ -17,6 +24,25 @@ interface JobCardProps {
 }
 
 export function JobCard( { vacancy }: JobCardProps) {
+  const { vacancies } = useVacancy()
+
+  function handleExportPdf(vacancyId: string) {
+    try {
+      const vacancyIndex = vacancies.findIndex(
+        (vacancy) => vacancy.id === vacancyId
+      )
+
+      const data = vacancies[vacancyIndex]
+
+      pdf(<PdfExportLayout vacancy={vacancies[vacancyIndex]} />)
+        .toBlob()
+        .then((blob) => saveAs(
+          blob, `${stringToSlug(data.jobTitle)}.pdf`)
+        )
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   function amountOfTheRestOfTags(totalAmount: number, quantityShown: number) {
     const hiddenAmount = (totalAmount - quantityShown);
@@ -37,7 +63,6 @@ export function JobCard( { vacancy }: JobCardProps) {
               Fase: {vacancy.processSteps[0]}
             </span>
           </div>
-
           <span className={styles.salary}>
             {formatPrice(vacancy.wage)}
           </span>
@@ -53,14 +78,12 @@ export function JobCard( { vacancy }: JobCardProps) {
           {vacancy.benefits.slice(0,3).map((benefit) => (
             <li key={benefit}>{benefit}</li>
           ))}
-
           {(restTags > 0) && <li>{restTags}</li>}  
         </div>
-
       </div>
 
       <div className={styles.cardFooter}>
-        <button>
+        <button onClick={() => handleExportPdf(vacancy.id)}>
           <FilePdf size={24} />
           Exportar
         </button>

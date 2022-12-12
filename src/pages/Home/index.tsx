@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 
 export function Home () {
   const { vacancies } = useVacancy()
-
+  
   return (
     <>
       <header>
