@@ -1,0 +1,6 @@
+.vacancyList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2rem;
+  gap: 2rem;
+}

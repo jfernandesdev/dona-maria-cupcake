@@ -1,17 +1,24 @@
 import { useVacancy } from "../../hooks/useVacancy"
 
+import { JobCard } from '../../components/JobCard'
+
+import styles from './styles.module.scss'
+
 export function Home () {
   const { vacancies } = useVacancy()
 
   return (
     <>
-      <h1>Home</h1>
+      <header>
+        <h1>Vagas cadastradas</h1>
+        <span>{vacancies.length} vagas</span>
+      </header>
 
-      <ul>
+      <div className={styles.vacancyList}>
         {vacancies.map((item) => (
-          <li key={item.id}>{item.jobTitle}</li>
+          <JobCard key={item.id} vacancy={item} />
         ))}
-      </ul>
+      </div>
     </>
   )
 }

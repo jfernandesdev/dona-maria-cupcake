@@ -59,7 +59,8 @@ export function NewVacancy () {
 
     const newVacancy = {
       ...data,
-      id: uuid()
+      id: uuid(),
+      creationDate: new Date(),
     }
     addVacancy(newVacancy)
 

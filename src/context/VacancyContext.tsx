@@ -10,6 +10,7 @@ interface VacancyData {
   jobActivity: string,
   skills: string,
   experienceRequired: string,
+  creationDate: Date,
 }
 
 interface VacancyProviderProps {
