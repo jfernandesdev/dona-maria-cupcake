@@ -11,6 +11,7 @@
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   background: var(--purple-500);
+  z-index: 999;
 
   .brandLogo {
     width: 80px;
@@ -18,6 +19,24 @@
     object-fit: cover;
     border-bottom: 1px solid rgba(255,255,255,0.2);
     cursor: pointer;
+  }
+
+  @media(max-width: 768px) {
+    flex-direction: row;
+    justify-content: center;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+    padding: 0;
+    border-radius: 20px 20px 0 0;
+
+    .brandLogo {
+      position: fixed;
+      top: 0;
+      left: 1rem;
+      border-bottom: none;
+    }
   }
 }
 
@@ -32,6 +51,10 @@
   a {
     border-radius: 20px;
   }
+
+  @media(max-width: 768px) {
+    flex-direction: row;
+  }
 }
 
 .optionMenu {
@@ -45,7 +68,11 @@
   border-radius: 1rem;
   cursor: pointer;
   transition: all ease-out 120px;
-  
+
+  @media(max-width: 768px) {
+    font-size: 1.8rem;
+  }
+
   .tooltip {
     position: absolute;
     display: inline-block;
@@ -79,6 +106,14 @@
     .tooltip {
       visibility: visible;
       opacity: 1;
+    }
+
+    @media(max-width: 768px) {
+      background: transparent;
+
+      .tooltip {
+        display: none;
+      }
     }
   }
 }

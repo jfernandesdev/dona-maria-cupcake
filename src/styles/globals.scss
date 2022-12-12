@@ -72,3 +72,9 @@ a {
 .select__placeholder {
   font-weight: 400 !important;
 }
+
+@media(max-width: 768px) {
+  html {
+    font-size: 87.5%;
+  }
+}
