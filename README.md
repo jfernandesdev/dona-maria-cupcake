@@ -32,19 +32,19 @@ A ideia do desafio é atender a demanda da cliente, permitindo que ela preencha 
 
 ### Desktop (screenshot):
 
-| Desktop 1 | Desktop 2 |
+| Home sem vagas | Home com vagas |
 | --- | --- |
-| <img src="" /> | <img src="" /> | 
+| <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/dektop-1.png" /> | <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/dektop-4.png" /> | 
 
-| Desktop 3 | Desktop 4|
+| Formulário nova vaga | Ex. preenchimento |
 | --- | --- |
-| <img src="" /> | <img src="" /> |
+| <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/dektop-2.png" /> | <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/dektop-3.png" /> |
 
 ### Mobile (screenshot):
 
-| Mobile 1 | Mobile 2 | Mobile 3 | Mobile 4 |
+| Home sem vagas | Home com vagas | Nova vaga | Ex. preenchimento |
 | --- | --- | --- | --- |
-| <img src="" width='275px' /> | <img src="" width='275px' /> | <img src="" width='275px' /> | <img src="" width='275px' /> |
+| <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/mobile-1.png" width='275px' /> | <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/mobile-4.png" width='275px' /> | <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/mobile2.png" width='275px' /> | <img src="https://github.com/jfernandesdev/dona-maria-cupcake/blob/2be06bfc5bc3a96e0cf4816314ba6a87054294ab/public/layout/mobile-3.png" width='275px' /> |
 
 
 ##  Rodando a aplicação localmente: ⚙
