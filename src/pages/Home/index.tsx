@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { MagnifyingGlass, PlusCircle, ScribbleLoop } from 'phosphor-react'
 
 import { useVacancy } from '../../hooks/useVacancy'
 
 import { JobCard } from '../../components/JobCard'
 
 import styles from './styles.module.scss'
-import { MagnifyingGlass, PlusCircle, ScribbleLoop } from 'phosphor-react'
 
 export function Home () {
   const { vacancies } = useVacancy()

@@ -29,7 +29,7 @@
 
   .inputsInline {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 20%;
     gap: 1rem;
 
     @media(max-width: 768px) {
@@ -41,16 +41,18 @@
     display: flex;
     align-items: center;
     height: 48px;
-    padding: 0 0.5rem;
+    padding-left: 0.5rem;
     font-weight: 600;
     color: var(--gray-500);
     background: var(--white);
     border: 1px solid var(--gray-300);
     border-radius: 0.5rem;
+    position: relative;
     overflow: hidden;
 
     >input {
-      flex-grow: 1;
+      flex: 1;
+      width: 100%;
       border: none;
       outline: none;
 
@@ -252,7 +254,7 @@
 
 .customCheckbox {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 
   @media(max-width: 768px) {
     display: grid;
@@ -278,13 +280,14 @@
     align-items: center;
     justify-content: center;
     height: 2.5rem;
+    padding: 10px;
     background: var(--gray-100);
     color: var(--gray-500);
     font-weight: 600;
     font-size: 0.75rem;
+    text-align: center;
     border-radius: 6px;
     border: 1px solid var(--gray-300);
-    white-space: nowrap;
     text-transform: uppercase;
     transition: background 0.2s color 0.2s;
     cursor: pointer;

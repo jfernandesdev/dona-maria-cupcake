@@ -1,6 +1,6 @@
 import { pdf } from '@react-pdf/renderer'
 import { saveAs } from 'file-saver'
-import { FilePdf } from 'phosphor-react'
+import { FilePdf, TrashSimple } from 'phosphor-react'
 
 import { PdfExportLayout } from '../../layouts/PdfExportLayout'
 
@@ -23,7 +23,7 @@ interface JobCardProps {
 }
 
 export function JobCard( { vacancy }: JobCardProps) {
-  const { vacancies } = useVacancy()
+  const { vacancies,removeVacancy } = useVacancy()
 
   function handleExportPdf(vacancyId: string) {
     try {
@@ -83,7 +83,18 @@ export function JobCard( { vacancy }: JobCardProps) {
       </div>
 
       <div className={styles.cardFooter}>
-        <button  onClick={() => handleExportPdf(vacancy.id)} >
+        <button 
+          className={styles.deleteButton}
+          onClick={() => removeVacancy(vacancy.id)}
+          title="Excluir vaga"
+        >
+          <TrashSimple size={18} />
+        </button>
+
+        <button  
+          onClick={() => handleExportPdf(vacancy.id)} 
+          className={styles.exportButton}
+        >
           <FilePdf size={24} />
           Exportar
         </button>

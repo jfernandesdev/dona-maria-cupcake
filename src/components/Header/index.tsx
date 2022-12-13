@@ -8,7 +8,11 @@ export function Header() {
   return (
     <header className={styles.container}>
 
-      <button className={styles.notificationButton} aria-label="notification">
+      <button 
+        className={styles.notificationButton} 
+        aria-label="notification"
+        title="Me contrate Obuc! :)"
+      >
         <EnvelopeSimple size={32} weight="light"/>
       </button>
 

@@ -3,14 +3,13 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-
 import uuid from 'react-uuid'
-
-import { useVacancy } from '../../hooks/useVacancy'
 
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated';
 import Swal from 'sweetalert2'
+
+import { useVacancy } from '../../hooks/useVacancy'
 
 import { processStepsOptions } from '../../utils/processStepsOptions'
 import { experienceRequiredOptions } from '../../utils/experienceRequiredOptions'
@@ -41,19 +40,11 @@ export function NewVacancy () {
     }
   })
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors, isSubmitting }
-  } = methods;
-
+  const { register, handleSubmit, control, reset, formState: { errors, isSubmitting }} = methods;
   const animatedComponents = makeAnimated();
   const navigate = useNavigate();
   const [showEmptyStepError, setShowEmptyStepError] = useState(false);
   
-
   async function handleNewVacancy(data: NewVacancyFormInputs) {
     const { processSteps } = data;
 

@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState, useEffect, useRef } from 'react'
 import produce from 'immer'
+import Swal from 'sweetalert2'
 
 interface VacancyData {
   id: string,
@@ -20,6 +21,7 @@ interface VacancyProviderProps {
 export interface VacancyContextData {
   vacancies: VacancyData[]
   addVacancy: (data: VacancyData) => void
+  removeVacancy: (vacancyId: string) => void
 }
 
 export const VacancyContext = createContext<VacancyContextData>({} as VacancyContextData)
@@ -49,7 +51,15 @@ export function VacancyProvider({ children }: VacancyProviderProps) {
     }
   }, [vacancies, vacancyPreviousValue])
 
-  async function addVacancy(data: VacancyData) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+  })
+
+  function addVacancy(data: VacancyData) {
     try {
       const newVacancy = {
         ...data,
@@ -59,15 +69,50 @@ export function VacancyProvider({ children }: VacancyProviderProps) {
       const vacancyList = produce(vacancies, (draft) => {
         draft.push(newVacancy)
       })
-      
       setVacancies(vacancyList)
     } catch (error) {
       console.log(error)
     }
   }
 
+  function removeVacancy(vacancyId: string) {
+    Swal.fire({
+      title: 'Deseja excluir essa vaga?',
+      text: "Essa opção não poderá ser  desfeita",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+         try {
+          const updateVacancyList = [...vacancies]
+          const vacancyIndex = updateVacancyList.findIndex(
+            (vacancy) => vacancy.id === vacancyId
+          )
+          
+          if(vacancyIndex >= 0) {
+            updateVacancyList.splice(vacancyIndex, 1)
+            setVacancies(updateVacancyList)
+            Toast.fire({
+              icon: 'success',
+              title: 'Vaga excluída com sucesso!'
+            })
+          } else {
+            throw Error()
+          }
+        } catch {
+           Toast.fire({
+             icon: 'error',
+             title: 'Erro ao tentar excluir essa vaga. Por favor tente novamente.'
+           })
+        }  
+      }
+    })
+  }
+
   return (
-    <VacancyContext.Provider value={{ vacancies, addVacancy }}>
+    <VacancyContext.Provider value={{ vacancies, addVacancy, removeVacancy }}>
       {children}
     </VacancyContext.Provider>
   )
