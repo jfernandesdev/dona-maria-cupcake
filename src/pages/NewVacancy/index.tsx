@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -34,12 +35,8 @@ export function NewVacancy () {
   const methods = useForm<NewVacancyFormInputs>({
     resolver: yupResolver(newVacancyFormSchema),
     defaultValues: {
-      jobTitle: 'Title Job',
-      wage: 2000,
-      jobActivity: 'Atividade 1; Atividade 2',
-      processSteps: ["Inscrição", "Resultado Final"],
-      benefits: ['Vale-alimentação'],
-      skills: 'Skill 1, Skill 2',
+      processSteps: [''],
+      benefits: [''],
       experienceRequired: 'Sem necessidade'
     }
   })
@@ -54,8 +51,16 @@ export function NewVacancy () {
 
   const animatedComponents = makeAnimated();
   const navigate = useNavigate();
+  const [showEmptyStepError, setShowEmptyStepError] = useState(false);
   
+
   async function handleNewVacancy(data: NewVacancyFormInputs) {
+    const { processSteps } = data;
+
+    if(processSteps.length < 1) {
+      setShowEmptyStepError(true)
+      return;
+    }
 
     const newVacancy = {
       ...data,
@@ -100,6 +105,9 @@ export function NewVacancy () {
               </div>
             ))}
           </div>
+          <small className={styles.alertError}>
+            {(errors.processSteps || showEmptyStepError) && 'Selecione pelo menos uma etapa do processo' }
+          </small>
         </label>
         
         <div className={styles.inputsInline}>
@@ -134,8 +142,6 @@ export function NewVacancy () {
             name='benefits'
             render={({ field: { onChange, value, ref } }) => (
               <>
-                {console.log(value)}
-
                 <Select
                   ref={ref}
                   value={benefitsOptions.filter(c => value.includes(c.value))}

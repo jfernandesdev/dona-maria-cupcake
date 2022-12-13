@@ -1,6 +1,5 @@
 import { pdf } from '@react-pdf/renderer'
 import { saveAs } from 'file-saver'
-
 import { FilePdf } from 'phosphor-react'
 
 import { PdfExportLayout } from '../../layouts/PdfExportLayout'
@@ -36,9 +35,10 @@ export function JobCard( { vacancy }: JobCardProps) {
 
       pdf(<PdfExportLayout vacancy={vacancies[vacancyIndex]} />)
         .toBlob()
-        .then((blob) => saveAs(
-          blob, `${stringToSlug(data.jobTitle)}.pdf`)
-        )
+        .then((blob) => {
+          saveAs(blob, `${stringToSlug(data.jobTitle)}.pdf`)
+        }
+      )
     } catch (error) {
       console.log(error)
     }
@@ -83,7 +83,7 @@ export function JobCard( { vacancy }: JobCardProps) {
       </div>
 
       <div className={styles.cardFooter}>
-        <button onClick={() => handleExportPdf(vacancy.id)}>
+        <button  onClick={() => handleExportPdf(vacancy.id)} >
           <FilePdf size={24} />
           Exportar
         </button>

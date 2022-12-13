@@ -69,6 +69,12 @@
     }
   }
 
+  .alertError {
+    color: var(--red-500);
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
   footer {
     display: flex;
     align-items: center;
