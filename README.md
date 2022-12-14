@@ -14,8 +14,9 @@ A ideia do desafio é atender a demanda da cliente, permitindo que ela preencha 
 - [x] Validação dos dados;
 - [x] Exportação do formulário em PDF;
 - [x] Listagem das vagas cadastradas;
-- [x] Filtro de busca das vagas;
-- [x] Opção de excluir vaga cadastrada;
+- [x] Filtro de busca das vagas (pelo título);
+- [x] Duplicar vaga;
+- [x] Excluir vaga;
 - [x] Responsividade mobile.
 
 ### Principais tecnologias utilizadas: 🚀

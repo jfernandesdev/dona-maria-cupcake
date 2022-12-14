@@ -11,7 +11,7 @@ export function Sidebar() {
       <img src={IconCupcake} className={styles.brandLogo} alt="Cupcake Dona Maria" />
 
       <ul>
-        <NavLink href='/' icon={<House/>}  tooltip="Home" />
+        <NavLink href='/' icon={<House/>}  tooltip="Home"/>
         <NavLink href='/nova-vaga' icon={<Briefcase />} tooltip="Cadastrar nova vaga" />
       </ul>
 

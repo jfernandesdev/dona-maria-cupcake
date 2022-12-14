@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import produce from 'immer'
 import Swal from 'sweetalert2'
 
@@ -22,6 +23,9 @@ export interface VacancyContextData {
   vacancies: VacancyData[]
   addVacancy: (data: VacancyData) => void
   removeVacancy: (vacancyId: string) => void
+  copyVacancy: (vacancyId: string) => void
+  resetCopy: () => void
+  copiedJobInfo: VacancyData | undefined
 }
 
 export const VacancyContext = createContext<VacancyContextData>({} as VacancyContextData)
@@ -36,6 +40,9 @@ export function VacancyProvider({ children }: VacancyProviderProps) {
 
     return []
   })
+
+  const [copiedJobInfo, setCopiedJobInfo] = useState<VacancyData | undefined>({} as VacancyData)
+  const navigate = useNavigate()
 
   const prevVacancyRef = useRef<VacancyData[]>()
 
@@ -111,8 +118,24 @@ export function VacancyProvider({ children }: VacancyProviderProps) {
     })
   }
 
+  function copyVacancy(vacancyId: string) {
+    const getVacancyList = [...vacancies]
+    const vacancyIndex = getVacancyList.findIndex(
+      (vacancy) => vacancy.id === vacancyId
+    )
+
+    const data = vacancies[vacancyIndex]
+
+    setCopiedJobInfo(data)
+    navigate('/nova-vaga') 
+  }
+
+  function resetCopy() {
+    setCopiedJobInfo(undefined)
+  }
+
   return (
-    <VacancyContext.Provider value={{ vacancies, addVacancy, removeVacancy }}>
+    <VacancyContext.Provider value={{ vacancies, addVacancy, removeVacancy, copyVacancy, copiedJobInfo, resetCopy }}>
       {children}
     </VacancyContext.Provider>
   )

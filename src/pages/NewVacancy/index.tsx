@@ -30,13 +30,19 @@ const newVacancyFormSchema = yup.object({
 type NewVacancyFormInputs = yup.InferType<typeof newVacancyFormSchema>
 
 export function NewVacancy () {
-  const { addVacancy } = useVacancy()
+  const { addVacancy, copiedJobInfo, resetCopy } = useVacancy()
+
   const methods = useForm<NewVacancyFormInputs>({
     resolver: yupResolver(newVacancyFormSchema),
-    defaultValues: {
-      processSteps: [''],
-      benefits: [''],
-      experienceRequired: 'Sem necessidade'
+    defaultValues:
+    {
+      processSteps: (copiedJobInfo?.processSteps) ? copiedJobInfo.processSteps : [''],
+      jobTitle: (copiedJobInfo?.jobTitle) ? `${copiedJobInfo.jobTitle} - cópia` : '',
+      wage:(copiedJobInfo?.wage) ? copiedJobInfo.wage : undefined,
+      benefits:(copiedJobInfo?.benefits) ? copiedJobInfo.benefits : [''],
+      skills:(copiedJobInfo?.skills) ? copiedJobInfo.skills : '',
+      jobActivity:(copiedJobInfo?.jobActivity) ? copiedJobInfo.jobActivity : '',
+      experienceRequired:(copiedJobInfo?.experienceRequired) ? copiedJobInfo.experienceRequired : 'Sem necessidade',
     }
   })
 
@@ -58,8 +64,8 @@ export function NewVacancy () {
       id: uuid(),
       creationDate: new Date(),
     }
-    addVacancy(newVacancy)
 
+    addVacancy(newVacancy)
     reset()
 
     Swal.fire({
@@ -190,7 +196,7 @@ export function NewVacancy () {
 
         <footer>
           <NavLink to="/">
-            <button type="reset">
+            <button type="reset" onClick={resetCopy}>
               Cancelar
             </button>
           </NavLink>

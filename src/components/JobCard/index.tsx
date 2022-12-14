@@ -1,6 +1,6 @@
 import { pdf } from '@react-pdf/renderer'
 import { saveAs } from 'file-saver'
-import { FilePdf, TrashSimple } from 'phosphor-react'
+import { FilePdf, TrashSimple, CopySimple } from 'phosphor-react'
 
 import { PdfExportLayout } from '../../layouts/PdfExportLayout'
 
@@ -23,7 +23,7 @@ interface JobCardProps {
 }
 
 export function JobCard( { vacancy }: JobCardProps) {
-  const { vacancies,removeVacancy } = useVacancy()
+  const { vacancies, removeVacancy, copyVacancy } = useVacancy()
 
   function handleExportPdf(vacancyId: string) {
     try {
@@ -83,6 +83,14 @@ export function JobCard( { vacancy }: JobCardProps) {
       </div>
 
       <div className={styles.cardFooter}>
+        <button
+          className={styles.copyButton}
+          onClick={() => copyVacancy(vacancy.id)}
+          title="Usar informações dessa vaga para um novo cadastro?"
+        >
+          <CopySimple size={18} />
+        </button>
+
         <button 
           className={styles.deleteButton}
           onClick={() => removeVacancy(vacancy.id)}
